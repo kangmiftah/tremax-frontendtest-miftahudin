@@ -1,10 +1,10 @@
 import { Action, AnyAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { layoutStateType, secondSidebarType } from "../../../@types/redux/slices/layouts/layoutSlice";
+import { layoutStateType } from "../../../@types/redux/slices/layouts/layoutSlice";
 import { HYDRATE } from "next-redux-wrapper";
-const initialState: layoutStateType = {
+import { mapDataType, mapStateType } from "../../../@types/redux/slices/map/mapSlice";
+const initialState: mapStateType = {
+   mapData : [],
    sidebarOpen: false,
-   title: "Aran Ui",
-   secondSidebarList: []
 };
 interface RejectedAction extends Action {
    error: Error;
@@ -12,23 +12,20 @@ interface RejectedAction extends Action {
 function isRejectedAction(action: AnyAction): action is RejectedAction {
    return action.type.endsWith("rejected");
 }
-const layoutSlice = createSlice({
-   name: "layout",
+const mapSlice = createSlice({
+   name: "map",
    initialState,
    reducers: {
-      toggleSidebar: (state: layoutStateType) => {
+      toggleSidebar: (state) => {
          return {
             ...state,
             sidebarOpen: !state.sidebarOpen,
          };
       },
-      setSidebarList: (state: layoutStateType, action : PayloadAction<Array<secondSidebarType>>) =>{
-
-         return {
+      setMakerSelected : (state: mapStateType, action: PayloadAction<mapDataType>) => ({
          ...state,
-         secondSidebarList: action.payload
-         }
-      }
+         markerSelected: action.payload
+      })
    },
    extraReducers(builder) {
       builder
@@ -42,5 +39,5 @@ const layoutSlice = createSlice({
    },
 });
 
-export const layoutActions = layoutSlice.actions;
-export default layoutSlice.reducer;
+export const mapActions = mapSlice.actions;
+export default mapSlice.reducer;

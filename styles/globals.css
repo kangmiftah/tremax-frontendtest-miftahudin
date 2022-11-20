@@ -13,3 +13,27 @@ body {
    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
+
+::-webkit-scrollbar {
+   width: 7px;
+   /* display: none; */
+ }
+
+ ::-webkit-scrollbar:focus{
+   display: inherit;
+ }
+ 
+ /* Track */
+ aside::-webkit-scrollbar-track {
+   background: #313541; 
+ }
+  
+ /* Handle */
+ ::-webkit-scrollbar-thumb {
+   background: '#282c37'; 
+ }
+ 
+ /* Handle on hover */
+ ::-webkit-scrollbar-thumb:hover {
+   background: #555; 
+ }
